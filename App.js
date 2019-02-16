@@ -5,7 +5,17 @@ import { MapView } from "expo";
 export default class App extends React.Component {
 
   state = {
-    location:null
+    location:null,
+
+    markers:[
+      { lat:59,
+        lon:17 },
+      { lat:59.5,
+        lon:17 },
+      { lat:60,
+        lon:17 }
+    ]
+
   }
   findCoordinates = () => {
     navigator.geolocation.getCurrentPosition(
@@ -21,9 +31,34 @@ export default class App extends React.Component {
   componentDidMount(){
     this.findCoordinates()
   }
+
+  renderMarkers() {
+    markers = [];
+    for (marker of this.state.markers) {
+      markers.push(
+        <MapView.Marker
+          coordinate={{
+            latitude: marker.lat,
+            longitude: marker.lon
+          }}
+        >
+
+          <MapView.Callout>
+            <View>
+              <Text>I'm coming!</Text>
+            </View>
+          </MapView.Callout>
+
+        </MapView.Marker>
+      );
+    }
+    return markers;
+  }
+
+
   render() {
     return (
-        <MapView
+      <MapView
         style={{
           flex: 1
         }}
@@ -33,7 +68,11 @@ export default class App extends React.Component {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421
         }}
-      />
+      >
+
+        {this.renderMarkers()}
+
+      </MapView>
     );
   }
 }
