@@ -6,7 +6,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <Button
-          title="click me"
+          title="click"
           color="#249300"
           accessibilityLabel="Learn more about this green button"
         />
