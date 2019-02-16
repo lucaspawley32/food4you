@@ -18,9 +18,12 @@ export default class App extends React.Component {
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
   };
+  componentDidMount(){
+    this.findCoordinates()
+  }
   render() {
     return (
-      <MapView
+        <MapView
         style={{
           flex: 1
         }}
@@ -31,6 +34,10 @@ export default class App extends React.Component {
           longitudeDelta: 0.0421
         }}
       />
+
+
+
+
     );
   }
 }
