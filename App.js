@@ -9,11 +9,17 @@ export default class App extends React.Component {
 
     markers:[
       { lat:59,
-        lon:17 },
+        lon:17,
+        name:"pizza buffet",
+        description:"we have pizzas"},
       { lat:59.5,
-        lon:17 },
+        lon:17,
+        name:"chinese food buffet",
+        description:"we have chinese food" },
       { lat:60,
-        lon:17 }
+        lon:17,
+        name:"jap food buffet",
+        description:"we have jap food" }
     ]
 
   }
@@ -41,15 +47,9 @@ export default class App extends React.Component {
             latitude: marker.lat,
             longitude: marker.lon
           }}
-        >
-
-          <MapView.Callout>
-            <View>
-              <Text>I'm coming!</Text>
-            </View>
-          </MapView.Callout>
-
-        </MapView.Marker>
+          title={marker.name}
+          description={marker.description}
+        />
       );
     }
     return markers;
