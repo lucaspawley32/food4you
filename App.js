@@ -18,10 +18,12 @@ export default class App extends React.Component {
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
   };
-
+  componentDidMount(){
+    this.findCoordinates()
+  }
   render() {
     return (
-      <MapView
+        <MapView
         style={{
           flex: 1
         }}
@@ -31,18 +33,7 @@ export default class App extends React.Component {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421
         }}
-      >
-
-        //Customer Marker that when clicked shows menu
-        <MapView.Marker
-          coordinate={{
-            latitude: 59.78825,
-            longitude: 18.4324,
-          }}
-        />
-
-
-      </MapView>
+      />
     );
   }
 }
