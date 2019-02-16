@@ -3,6 +3,27 @@ import { StyleSheet, Text, View } from "react-native";
 import { MapView } from "expo";
 
 export default class App extends React.Component {
+<<<<<<< HEAD
+
+  state = {
+    location:null,
+
+    markers:[
+      { lat:59,
+        lon:17,
+        name:"pizza buffet",
+        description:"we have pizzas"},
+      { lat:59.5,
+        lon:17,
+        name:"chinese food buffet",
+        description:"we have chinese food" },
+      { lat:60,
+        lon:17,
+        name:"jap food buffet",
+        description:"we have jap food" }
+    ]
+
+=======
   constructor(props){
     super(props);
     this.state = {
@@ -17,6 +38,7 @@ export default class App extends React.Component {
           lon:-75.665 }
       ]
     }
+>>>>>>> f562ed760830d2b4b47adee728645efc0ef373ee
   }
 
   findCoordinates = () => {
@@ -45,15 +67,9 @@ export default class App extends React.Component {
             latitude: marker.lat,
             longitude: marker.lon
           }}
-        >
-
-          <MapView.Callout>
-            <View>
-              <Text>I'm coming!</Text>
-            </View>
-          </MapView.Callout>
-
-        </MapView.Marker>
+          title={marker.name}
+          description={marker.description}
+        />
       );
     }
     return markers;
