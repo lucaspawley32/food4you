@@ -1,16 +1,36 @@
 import React from 'react';
-import { StyleSheet, Text, View,Button } from 'react-native';
+import { StyleSheet, Text, View } from "react-native";
+import { MapView } from "expo";
 
 export default class App extends React.Component {
+
+  state = {
+    location:null
+  }
+  findCoordinates = () => {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const location = JSON.stringify(position);
+
+        this.setState({ location });
+      },
+      error => Alert.alert(error.message),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
+  };
   render() {
     return (
-      <View style={styles.container}>
-        <Button
-          title="click"
-          color="#249300"
-          accessibilityLabel="Learn more about this green button"
-        />
-      </View>
+      <MapView
+        style={{
+          flex: 1
+        }}
+        initialRegion={{
+          latitude: 37.78825,
+          longitude: -122.4324,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421
+        }}
+      />
     );
   }
 }
