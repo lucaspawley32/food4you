@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { MapView } from "expo";
 
 export default class App extends React.Component {
+<<<<<<< HEAD
 
   state = {
     location:null,
@@ -22,13 +23,32 @@ export default class App extends React.Component {
         description:"we have jap food" }
     ]
 
+=======
+  constructor(props){
+    super(props);
+    this.state = {
+      latitude:0,
+      longitude:0,
+      markers:[
+        { lat:45.423,
+          lon:-75.6 },
+        { lat:45.423,
+          lon:-75.65 },
+        { lat:45.263,
+          lon:-75.665 }
+      ]
+    }
+>>>>>>> f562ed760830d2b4b47adee728645efc0ef373ee
   }
+
   findCoordinates = () => {
     navigator.geolocation.getCurrentPosition(
       position => {
-        const location = JSON.stringify(position);
 
-        this.setState({ location });
+        this.setState({
+          latitude:position.coords.latitude,
+          longitude:position.coords.longitude
+        });
       },
       error => Alert.alert(error.message),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
@@ -57,14 +77,14 @@ export default class App extends React.Component {
 
 
   render() {
+    let center = this.state
     return (
-      <MapView
-        style={{
-          flex: 1
-        }}
+        <MapView
+        style={styles.map}
+        showsUserLocation={true}
         initialRegion={{
-          latitude: 59.78825,
-          longitude: 18.4324,
+          latitude: 	45.3990,
+          longitude: -75.6871,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421
         }}
@@ -84,4 +104,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  map:{
+    ...StyleSheet.absoluteFillObject
+  }
 });
