@@ -7,7 +7,15 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       latitude:0,
-      longitude:0
+      longitude:0,
+      markers:[
+        { lat:45.423,
+          lon:-75.6 },
+        { lat:45.423,
+          lon:-75.65 },
+        { lat:45.263,
+          lon:-75.665 }
+      ]
     }
   }
 
@@ -27,6 +35,31 @@ export default class App extends React.Component {
   componentDidMount(){
     this.findCoordinates()
   }
+
+  renderMarkers() {
+    markers = [];
+    for (marker of this.state.markers) {
+      markers.push(
+        <MapView.Marker
+          coordinate={{
+            latitude: marker.lat,
+            longitude: marker.lon
+          }}
+        >
+
+          <MapView.Callout>
+            <View>
+              <Text>I'm coming!</Text>
+            </View>
+          </MapView.Callout>
+
+        </MapView.Marker>
+      );
+    }
+    return markers;
+  }
+
+
   render() {
     let center = this.state
     return (
@@ -40,12 +73,10 @@ export default class App extends React.Component {
           longitudeDelta: 0.0421
         }}
       >
+
+        {this.renderMarkers()}
+
       </MapView>
-
-
-
-
-
     );
   }
 }
