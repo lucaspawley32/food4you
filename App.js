@@ -3,27 +3,6 @@ import { StyleSheet, Text, View } from "react-native";
 import { MapView } from "expo";
 
 export default class App extends React.Component {
-<<<<<<< HEAD
-
-  state = {
-    location:null,
-
-    markers:[
-      { lat:59,
-        lon:17,
-        name:"pizza buffet",
-        description:"we have pizzas"},
-      { lat:59.5,
-        lon:17,
-        name:"chinese food buffet",
-        description:"we have chinese food" },
-      { lat:60,
-        lon:17,
-        name:"jap food buffet",
-        description:"we have jap food" }
-    ]
-
-=======
   constructor(props){
     super(props);
     this.state = {
@@ -31,14 +10,19 @@ export default class App extends React.Component {
       longitude:0,
       markers:[
         { lat:45.423,
-          lon:-75.6 },
+          lon:-75.6,
+          name:"pizza place",
+          description:"we have pizza" },
         { lat:45.423,
-          lon:-75.65 },
+          lon:-75.65,
+          name:"hot dog place",
+          description:"we have hot dogs" },
         { lat:45.263,
-          lon:-75.665 }
+          lon:-75.665,
+          name:"cake place",
+          description:"we have cakes" }
       ]
     }
->>>>>>> f562ed760830d2b4b47adee728645efc0ef373ee
   }
 
   findCoordinates = () => {
@@ -75,11 +59,19 @@ export default class App extends React.Component {
     return markers;
   }
 
+  onPress(data) {
+    let lat = data.nativeEvent.coordinate.latitude;
+    let lon = data.nativeEvent.coordinate.longitude;
+    if (Math.abs(lat-this.state.latitude) < 0.01 && Math.abs(lon-this.state.longitude) < 0.01) {
+      alert("please add food");
+    } else {
+    }
+  }
 
   render() {
     let center = this.state
     return (
-        <MapView
+      <MapView
         style={styles.map}
         showsUserLocation={true}
         initialRegion={{
@@ -88,6 +80,8 @@ export default class App extends React.Component {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421
         }}
+
+        onPress={this.onPress.bind(this)}
       >
 
         {this.renderMarkers()}
