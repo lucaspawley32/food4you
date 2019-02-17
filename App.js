@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from "react-native";
 import { MapView } from "expo";
+import AddFood from './AddFood';
 
 export default class App extends React.Component {
   constructor(props){
@@ -8,6 +9,7 @@ export default class App extends React.Component {
     this.state = {
       latitude:0,
       longitude:0,
+      addedFood:false,
       markers:[
         { lat:45.423,
           lon:-75.6,
@@ -60,33 +62,49 @@ export default class App extends React.Component {
   }
 
   onPress(data) {
-    let lat = data.nativeEvent.coordinate.latitude;
-    let lon = data.nativeEvent.coordinate.longitude;
-    if (Math.abs(lat-this.state.latitude) < 0.01 && Math.abs(lon-this.state.longitude) < 0.01) {
-      alert("please add food");
-    } else {
+    let latitude = data.nativeEvent.coordinate.latitude;
+    let longitude = data.nativeEvent.coordinate.longitude;
+    let markers = this.state.markers;
+    if ( Math.abs(latitude-this.state.latitude) < 0.01 &&
+         Math.abs(longitude-this.state.longitude) < 0.01 &&
+         !this.state.addedFood ) {
+
+      this.refs.addFood.showAddFood();
+
+      // markers.push( { lat:latitude,
+      //                 lon:longitude,
+      //                 name:"name",
+      //                 description:"description" } );
+      // this.setState({addedFood:true});
     }
+    // this.setState({markers:markers});
   }
 
   render() {
     let center = this.state
     return (
-      <MapView
-        style={styles.map}
-        showsUserLocation={true}
-        initialRegion={{
-          latitude: 	45.3990,
-          longitude: -75.6871,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421
-        }}
+      <View style={{flex:1}}>
+        <MapView
+          style={styles.map}
+          showsUserLocation={true}
+          initialRegion={{
+            latitude: 	45.3990,
+            longitude: -75.6871,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421
+          }}
 
-        onPress={this.onPress.bind(this)}
-      >
+          onPress={this.onPress.bind(this)}
+        >
 
-        {this.renderMarkers()}
+          {this.renderMarkers()}
 
-      </MapView>
+        </MapView>
+
+        <AddFood ref='addFood'>
+        </AddFood>
+
+      </View>
     );
   }
 }
