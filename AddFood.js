@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 import { StyleSheet, Text, View, Dimensions, TextInput } from "react-native";
-import Modal from 'react-native-modalbox';
+import Modal from "react-native-modalbox";
 
-let screen = Dimensions.get('window');
+let screen = Dimensions.get("window");
 
 export default class AddFood extends React.Component {
   constructor(props) {
@@ -11,18 +11,18 @@ export default class AddFood extends React.Component {
 
   showAddFood = () => {
     this.refs.myAddFood.open();
-  }
+  };
 
   render() {
     return (
       <Modal
-        ref={'myAddFood'}
+        ref={"myAddFood"}
         style={{
-          justifyContent: 'center',
+          justifyContent: "center",
           width: screen.width - 10,
           height: 200
         }}
-        position='center'
+        position="center"
         onClose={() => {
           alert("food added");
         }}
